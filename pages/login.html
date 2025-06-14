@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASWE LOGIN</title>
+    <link rel="icon" href="/pages/img/И"> 
+    <style>
+        body {
+            background-color: rgb(43, 43, 43);
+            display: flex;
+            justify-content: center;
+           
+          
+            margin: 0;
+        }
+
+        .container-form {
+            border: 1px solid white;
+            height: 300px;
+            width: 350px;
+            border-radius: 20px;
+            padding: 20px;
+            background-color: rgb(15, 15, 15);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 350px;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: rgb(43, 43, 43);
+            color: white;
+        }
+
+        .form-group input:focus {
+            border-color: white;
+            outline: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: gray;
+        }
+
+        .toggle-link {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+       .photo{
+        max-width: 30%;
+        max-height: 30%;
+        position: absolute;
+       }
+    </style>
+</head>
+<body>
+    <img src="/assets/logo.png" alt="" class="photo">
+    <div class="container-form" id="form-container">
+
+        <div id="login-form">
+            <p class="form-title">Вход</p>
+            <div class="form-group">
+                <label for="login-username">Логин</label>
+                <input type="text" id="login-username" class="inpt">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Пароль</label>
+                <input type="password" id="login-password" class="inpt">
+            </div>
+            <div id="login-error" class="error"></div>
+            <button class="btn" onclick="login()">Войти</button>
+            <p class="toggle-link" onclick="showRegistrationForm()">Зарегистрироваться</p>
+        </div>
+
+        <div id="registration-form" style="display: none;">
+            <p class="form-title">Регистрация</p>
+            <div class="form-group">
+                <label for="reg-username">Логин</label>
+                <input type="text" id="reg-username" class="inpt">
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Пароль</label>
+                <input type="password" id="reg-password" class="inpt">
+            </div>
+            <div id="registration-error" class="error"></div>
+            <button class="btn" onclick="register()">Зарегистрироваться</button>
+            <p class="toggle-link" onclick="showLoginForm()">Уже есть аккаунт? Войти</p>
+        </div>
+    </div>
+
+    <script>
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('registration-form').style.display = 'none';
+        }
+
+        function showRegistrationForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('registration-form').style.display = 'block';
+        }
+
+        function register() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const errorMessage = document.getElementById('registration-error');
+
+            errorMessage.innerHTML = "";
+
+            if (username === "" || password === "") {
+                errorMessage.innerHTML = "Все поля должны быть заполнены.";
+                return;
+            }
+
+            if (localStorage.getItem(username)) {
+                errorMessage.innerHTML = "Этот логин уже зарегистрирован.";
+                return;
+            }
+
+            localStorage.setItem(username, password);
+            alert("Регистрация успешна! Теперь войдите.");
+            showLoginForm();
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            const errorMessage = document.getElementById('login-error');
+
+            errorMessage.innerHTML = "";
+
+            const storedPassword = localStorage.getItem(username);
+            if (!storedPassword) {
+                errorMessage.innerHTML = "Пользователь не найден.";
+                return;
+            }
+
+            if (storedPassword !== password) {
+                errorMessage.innerHTML = "Неверный пароль.";
+                return;
+            }
+
+            
+            location.replace("main-page.html");
+        }
+    </script>
+</body>
+</html>

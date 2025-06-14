@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/town-style.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+<center>
+  <div class="block">
+    <center>
+    <div class="mar">
+        <div class="form-group">
+        <label class="select-group">
+          <span class="select-label">Выберите свой город</span>
+          <select class="select">
+            <option value="moscow" selected>Москва</option>
+            <option value="st-petersburg">Санкт-Петербург</option>
+            <option value="kazan">Казань</option>
+            <option value="stavropol">Ставрополь</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="marg">
+    <div class="form-group">
+        <label class="checkbox-group">
+          <input type="checkbox" id="checkbox" class="checkbox">
+          <span class="checkbox-text">Вы согласны на обработку персональных данных</span>
+        </label>
+        <p id="checkbox-error" class="error-message"></p>
+      </div>
+    </div>
+    <button class="btn" id="save-btn">Сохранить</button>
+    </center>
+  </div>
+
+    <script>
+
+        document.getElementById('save-btn').addEventListener('click', function(event) {
+            const checkbox = document.getElementById('checkbox');
+            const checkboxError = document.getElementById('checkbox-error');
+
+            if (!checkbox.checked) {
+                checkboxError.textContent = "Необходимо согласиться на обработку персональных данных";
+                event.preventDefault(); // Предотвращаем отправку формы или переход по ссылке
+            } else {
+                checkboxError.textContent = "";
+                window.location.href = "/pages/main-page.html"; // Перенаправляем пользователя
+            }
+        });
+    </script>
+</body>
+</html>
