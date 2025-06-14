@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/smain-style.css">
+    <script src="scripts/main.js"></script>
+</head>
+<body>
+    
+<p class="main-text">Ваш город Москва?</p>
+
+<center>
+<button class="accept" id="accept">Да</button>
+<button class="not-accept" id="not-accept">Нет, другой</button>
+</center>
+
+
+<center>
+    <div class="yandex">
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab02847d37c83410db36160a986d1e680b16c65bab127ec85e9f1dae9fa004b25&amp;width=738&amp;height=463&amp;lang=ru_RU&amp;scroll=true"></script>
+    </div>
+</center>
+
+
+
+<script>
+document.getElementById('accept').onclick = function() {location.replace("pages/main-page.html")};
+
+document.getElementById('not-accept').onclick = function() {location.replace("pages/town-page.html")};
+</script>
+
+</body>
+</html> 
