@@ -1,0 +1,137 @@
+body{
+    color: white;
+    background-color: rgb(43, 43, 43);
+    display: flexbox;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.cont {
+    height: 400px;
+    width: 600px;
+    background-color: rgb(31, 31, 31);
+    border-radius: 20px;
+    margin-left: 30%;
+    margin-top: 10%;
+    padding-left: 30px;
+    padding-top: 30px;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.photo {
+    border-radius: 10px;
+}
+
+.btn-remove{
+    background-color: red;
+    color: white;
+    border: 0px solid;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+}
+
+.element::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  
+.nav-bar {
+    width: auto;
+    height: 80px;
+    background-color: rgb(15, 15, 15);
+    border-radius: 20px;
+    margin-top: 5px ;
+    position: sticky;
+}
+
+.logo-photo {
+    max-width: 10%;
+    margin-top: -10px;
+    margin-left: 20px ;
+}
+
+.header-search-block {
+
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin-top: -80px;
+    width: 800px;
+    margin-left: 500px;
+}
+
+
+
+.header-search-block form {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.header-search-block__search {
+    height: 46px;
+    border: 0;
+    border-radius: 10px;
+    padding: 0 10px;
+    outline-color: transparent;
+    width: calc(100% - 52px);
+}
+
+.header-search-submit {
+    background-color: #ff0000;
+    background-image: url(https://www.w3.org/Icons/search.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 44%;
+    height: 40px;
+    width: 47px;
+    border: 0;
+    outline-color: transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.vhod {
+    width: 200px;
+    height: 60px;
+    border: 0px black solid;
+    background-color:  rgb(255, 0, 0);
+    border-radius: 20px;
+    transition: 0.3s;
+    color: white;
+}
+
+.entrance{
+    margin-top: -55px;
+    margin-left: 1350px;
+}
+
+.contact {
+    margin-top: -60px;
+    margin-left: 1600px;
+   
+}
+
+.btn-buy{
+    width: 150px;
+    height: 70px;
+    border: 0px solid;
+    border-radius: 10px;
+    margin-left: 43%;
+    margin-top: 30px;
+    font-size: 20px;
+}
