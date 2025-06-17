@@ -74,7 +74,7 @@
           name: card.querySelector('.action-name')?.textContent || 'Неизвестный товар',
           weight: card.querySelectorAll('.action-name')[1]?.textContent || '',
           price: parseFloat(button.textContent) || 0,
-          img: card.querySelector('img').getAttribute('src'), // <== вот это главное
+          img: card.querySelector('img').getAttribute('src').replace(/^\/?/, './'), // <== вот это главное
           quantity: 1
         };
 
