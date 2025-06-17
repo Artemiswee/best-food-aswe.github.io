@@ -34,58 +34,59 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const container = document.getElementById('cart-container');
-          let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-          if (cart.length === 0) {
-            container.innerHTML = '<p>Корзина пуста</p>';
-            return;
-          }
-        
-          container.innerHTML = cart.map(item => `
-            <div class="cart-item">
-              <img src="${item.img}" width="50" class="photo">
-              <strong>${item.name}</strong> (${item.weight}) - ${item.price} ₽ × ${item.quantity}
-              <button class="btn-remove" onclick="removeItem('${item.id}')">Удалить</button>
-            </div>
-          `).join('');
-        
-          const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-          container.innerHTML += `<p>Итого: ${total} ₽</p>`;
-        });
-        
-        function removeItem(id) {
-          let cart = JSON.parse(localStorage.getItem('cart')) || [];
-          cart = cart.filter(item => item.id !== id);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          location.reload();
-        }
-        
-      document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('cart-container');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+      container.innerHTML = '<p>Корзина пуста</p>';
+      return;
+    }
+
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img src="${item.img}" width="50" class="photo">
+        <strong>${item.name}</strong> (${item.weight}) - ${item.price} ₽ × ${item.quantity}
+        <button class="btn-remove" onclick="removeItem('${item.id}')">Удалить</button>
+      </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    container.innerHTML += `<p>Итого: ${total} ₽</p>`;
+  });
+
+  function removeItem(id) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    location.reload();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.btn-cat');
-  
+
     buttons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        const card = button.closest('.actions-cont1');
+        const card = button.closest('.card'); // Ищем родителя-карточку
+
         const product = {
-          id: card.dataset.id,
-          name: card.dataset.name,
-          weight: card.dataset.weight,
-          price: parseFloat(card.dataset.price),
-          img: card.dataset.img,
+          id: card.dataset.id || card.querySelector('.action-name')?.textContent?.slice(0, 12) || Date.now(),
+          name: card.querySelector('.action-name')?.textContent || 'Неизвестный товар',
+          weight: card.querySelectorAll('.action-name')[1]?.textContent || '',
+          price: parseFloat(button.textContent) || 0,
+          img: card.querySelector('img').getAttribute('src'), // <== вот это главное
           quantity: 1
         };
-  
+
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+
         const existing = cart.find(item => item.id === product.id);
         if (existing) {
           existing.quantity += 1;
         } else {
           cart.push(product);
         }
-  
+
         localStorage.setItem('cart', JSON.stringify(cart));
         alert(`Добавлено в корзину: ${product.name}`);
       });
