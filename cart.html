@@ -33,33 +33,33 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('cart-container');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+         document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('cart-container');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    if (cart.length === 0) {
-      container.innerHTML = '<p>Корзина пуста</p>';
-      return;
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Корзина пуста</p>';
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.img}" width="50" class="photo" alt="Товар">
+          <strong>${item.name}</strong> (${item.weight}) - ${item.price} ₽ × ${item.quantity}
+          <button class="btn-remove" onclick="removeItem('${item.id}')">Удалить</button>
+        </div>
+      `).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      container.innerHTML += `<p>Итого: ${total} ₽</p>`;
+    });
+
+    function removeItem(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      location.reload();
     }
-
-    container.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <img src="${item.img}" width="50" class="photo">
-        <strong>${item.name}</strong> (${item.weight}) - ${item.price} ₽ × ${item.quantity}
-        <button class="btn-remove" onclick="removeItem('${item.id}')">Удалить</button>
-      </div>
-    `).join('');
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    container.innerHTML += `<p>Итого: ${total} ₽</p>`;
-  });
-
-  function removeItem(id) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter(item => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    location.reload();
-  }
 
   document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.btn-cat');
@@ -74,7 +74,7 @@
           name: card.querySelector('.action-name')?.textContent || 'Неизвестный товар',
           weight: card.querySelectorAll('.action-name')[1]?.textContent || '',
           price: parseFloat(button.textContent) || 0,
-          img: card.querySelector('img').getAttribute('src').replace(/^\/?/, './'), // <== вот это главное
+          img: card.querySelector('img').getAttribute('src') // <== вот это главное
           quantity: 1
         };
 
