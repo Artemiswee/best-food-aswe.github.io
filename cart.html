@@ -44,7 +44,6 @@
 
     container.innerHTML = cart.map(item => `
       <div class="cart-item">
-        <img src="${item.img}" width="50" class="photo">
         <strong>${item.name}</strong> (${item.weight}) - ${item.price} ₽ × ${item.quantity}
         <button class="btn-remove" onclick="removeItem('${item.id}')">Удалить</button>
       </div>
