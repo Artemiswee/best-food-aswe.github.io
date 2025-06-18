@@ -33,7 +33,7 @@
 
 
     <script>
-       document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('cart-container');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -67,13 +67,15 @@
     buttons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        const card = button.closest('.card'); // Ищем родителя-карточку
+        const card = button.closest('.card'); // Ищем родителя-карточку img: card.querySelector('img').getAttribute('src'),
+
+
         const product = {
           id: card.dataset.id || card.querySelector('.action-name')?.textContent?.slice(0, 12) || Date.now(),
           name: card.querySelector('.action-name')?.textContent || 'Неизвестный товар',
           weight: card.querySelectorAll('.action-name')[1]?.textContent || '',
           price: parseFloat(button.textContent) || 0,
-          img: card.querySelector('img').getAttribute('src') // <== вот это главное
+          img: card.querySelector('img').getAttribute('src'), // <== вот это главное
           quantity: 1
         };
 
@@ -92,7 +94,6 @@
     });
   });
   let cartCount = 0;
-
 // Найдем все кнопки "Добавить в корзину"
 document.querySelectorAll('.btn-cat').forEach(button => {
 button.addEventListener('click', () => {
